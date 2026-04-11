@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Licesing script
+# Licensing script
 # Made using Brave AI
 
 # Licensing library - source this in your scripts
 # Usage: source license.sh && validate_license
 
 LICENSE_FILE="license.dat"
-VALID_KEY_OBFUSCATED="MTYzNDU2Nzg5MDEyMzQ1Ng=="
+VALID_KEY_OBFUSCATED="NzM4MjkxMDQ1NjcyMzg0OQ=="
 
 validate_license() {
     # Check if license file exists
@@ -32,17 +32,23 @@ validate_license() {
 }
 
 prompt_for_license() {
-    while true; do
+    while [[ "$encoded_user_key" != "$VALID_KEY_OBFUSCATED" ]]; do
         echo "Please enter your 16-digit license key:"
         read -s user_key
         echo
 
         # Validate 16-digit format
         if [[ "$user_key" =~ ^[0-9]{16}$ ]]; then
-            # Encode and store
-            echo "$VALID_KEY_OBFUSCATED" > "$LICENSE_FILE"
-            echo "License activated successfully!"
-            break
+            # Encode user input and compare
+            local encoded_user_key=$(echo -n "$user_key" | base64)
+
+            if [[ "$encoded_user_key" == "$VALID_KEY_OBFUSCATED" ]]; then
+                # Store the obfuscated key
+                echo "$VALID_KEY_OBFUSCATED" > "$LICENSE_FILE"
+                echo "License activated successfully!"
+            else
+                echo "Invalid license key. Please try again."
+            fi
         else
             echo "Invalid format. Please enter exactly 16 digits."
         fi
