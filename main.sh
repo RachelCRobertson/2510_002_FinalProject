@@ -95,6 +95,6 @@ while [[ $choice -ne '3' ]]; do
 	fi
 done
 
-delete_user
+# delete_user
 
 echo "The program has finished running."
