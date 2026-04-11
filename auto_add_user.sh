@@ -1,5 +1,19 @@
 #!/bin/bash
 
+#-----------------------------------------
+# Filename:   auto_add_user.sh
+# Author:     RedDragon, Mallory Flesher
+# Purpose:    Provides the add_user()
+# 	      function that reads a
+# text file that holds usernames and
+# automatically generates passwords and
+# user accounts for each username.
+#
+# Functionality:
+#       1. Gen passwords
+#       2. Create accounts
+#-----------------------------------------
+
 add_user() {
 
      #beginning messages

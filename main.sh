@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#------------------------------------
+#-----------------------------------------
 # Filename:   main.sh
 # Author:     RedDragon, Rachel Robertson
 # Purpose:    Provides a UI for account
@@ -9,7 +9,7 @@
 #	1. Add users automatically
 #	   from a link.
 #	2. Add users manually
-#------------------------------------
+#-----------------------------------------
 
 
 #main Script for application
