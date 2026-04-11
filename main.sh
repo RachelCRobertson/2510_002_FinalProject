@@ -2,9 +2,9 @@
 
 #main Script for application
 
-source ./R_data.sh
-source ./add_user_accounts.sh
-source ./mannualAdd.sh
+source ./ReadData.sh
+source ./auto_add_user.sh
+source ./manualAdd.sh
 source ./licensing.sh
 
 menu(){
