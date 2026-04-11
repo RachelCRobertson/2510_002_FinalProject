@@ -10,18 +10,31 @@ WHITE='\033[0m'
 
 #Adds a user manually
 echo ""
-echo "Minimum length (3)."
-echo "Maximum length(32)."
-echo "No uppercase letters."
-echo "No special characters."
-echo "Must begin with a lowercase letter."
-read -p "Please Enter your username: " name
+read -p "First name: " firstName
 
-while ! [[ "$name" =~ ^[a-z][0-9a-z]{3,32}$ ]]; do
-	echo -e "${RED}Username is invalid.${WHITE}"
-	read -p "Please Enter your username: " name
+while ! [[ "$firstName" =~ ^[a-zA-Z]+$ ]]; do
+	echo -e "${RED}First name is invalid.${WHITE}"
+	read -p "Please Enter the first name: " firstName
 done
 
- sudo adduser $name
+# ubuntu only accepts usernames with lowercase letters
+firstName=${firstName,,}
 
-echo -e "${GREEN}${name} added successfully.${WHITE}"
+read -p "Last name: " lastName
+
+while ! [[ "$lastName" =~ ^[a-zA-Z]+$ ]]; do
+        echo -e "${RED}First name is invalid.${WHITE}"
+        read -p "Please Enter the last name: " lastName
+done
+
+# ubuntu only accepts usernames with lowercase letters
+lastName=${lastName,,}
+
+
+userName="$firstName"".""$lastName"
+password="$firstName""$lastName""DEELTECH"
+
+sudo adduser $userName --allow-bad-names  --disabled-password --gecos ""
+echo "$userName:$password" | sudo chpasswd
+
+echo -e "${GREEN}${userName} added successfully.${WHITE}"
