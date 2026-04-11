@@ -17,9 +17,6 @@ menu(){
 RED="\033[0;31m"
 WHITE="\033[0m"
 
-${RED}
-${WHITE}
-
 echo ""
 echo ""
 echo -e  "                       ##################"
@@ -59,7 +56,8 @@ echo "Developed by RedDragon"
 echo "Property of DEELTECH"
 echo "User Account Automation V1.0"
 # need to remove auto call to main
-#validate_license
+
+validate_license
 
 while [[ $choice -ne '3' ]]; do
 	menu

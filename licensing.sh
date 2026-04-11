@@ -6,6 +6,9 @@
 # Licensing library - source this in your scripts
 # Usage: source license.sh && validate_license
 
+GREEN="\033[0;32m"
+WHITE="\033[0m"
+
 LICENSE_FILE="license.dat"
 VALID_KEY_OBFUSCATED="NzM4MjkxMDQ1NjcyMzg0OQ=="
 
@@ -22,9 +25,14 @@ validate_license() {
         prompt_for_license
     fi
 
-    # License validated - run main program
+    # License validated - returns to main
     if [[ -f "./main.sh" ]]; then
-        bash ./main.sh
+       # bash ./main.sh
+	echo "------------------------------------------------"
+	echo -e "              ${GREEN}Valid License found!"
+	echo -e "                 Access granted${WHITE}"
+	echo "------------------------------------------------"
+	return 0
     else
         echo "Error: main.sh not found"
         exit 1
