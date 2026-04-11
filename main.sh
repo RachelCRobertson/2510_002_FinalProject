@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #main Script for application
+
 source ./R_data.sh
 source ./add_user_accounts.sh
 source ./mannualAdd.sh
