@@ -23,5 +23,5 @@ while ! [[ "$name" =~ ^[a-z][0-9a-z]{3,32}$ ]]; do
 done
 
  sudo adduser $name
- sudo userdel $name
+
 echo -e "${GREEN}${name} added successfully.${WHITE}"
