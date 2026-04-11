@@ -1,10 +1,21 @@
 #!/bin/bash
 
-# Licensing script
+#------------------------------------------------------
+# Filename:   auto_add_user.sh
+# Author:     RedDragon, Rachel Robertson, Brave AI Leo
+# Purpose:    Provides the validate_license()
+#             function that requires the end user
+# to input a 16-digit key in order to generate a .dat
+# file that is checked for whenever the main script is
+# run.
+#
+# Functionality:
+#       1. Checks for license
+#       2. Gens license if user inputs key
+#------------------------------------------------------
+
 # Made using Brave AI
 
-# Licensing library - source this in your scripts
-# Usage: source license.sh && validate_license
 
 GREEN="\033[0;32m"
 WHITE="\033[0m"

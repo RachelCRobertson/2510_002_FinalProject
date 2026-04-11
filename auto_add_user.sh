@@ -14,6 +14,9 @@
 #       2. Create accounts
 #-----------------------------------------
 
+GREEN="\033[0;32m"
+WHITE="\033[0m"
+
 add_user() {
 
      #beginning messages
@@ -64,6 +67,7 @@ add_user() {
           done <<< "$output"
 
           echo "$username:$password" | sudo chpasswd
+          echo -e "\t${GREEN}$username added successfully.${WHITE}"
           echo "-------------------------------------------------"
      done
 }

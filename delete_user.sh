@@ -16,6 +16,9 @@
 
 source ./auto_add_user.sh
 
+GREEN="\033[0;32m"
+WHITE="\033[0m"
+
 delete_user()
 {
      #counter
@@ -32,6 +35,7 @@ delete_user()
 
           #checking if delete worked
           id "$user"
+	  echo -e "${GREEN}$user removed successfully.${WHITE}"
           echo "-------------------------------------------------"
      done
 }
