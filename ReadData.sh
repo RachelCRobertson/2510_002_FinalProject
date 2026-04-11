@@ -1,6 +1,7 @@
 #!/bin/bash
 
 scrape(){
+	echo "Pulling data from website..."
 	curl -s https://www.tntech.edu/engineering/programs/csc/faculty-and-staff.php |  
 	grep -oP '(?<=<h4><strong>)[^,<]*' |
 	tr '\n' '#' |
