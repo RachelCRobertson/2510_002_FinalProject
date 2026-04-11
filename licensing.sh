@@ -3,8 +3,6 @@
 # Licesing script
 # Made using Brave AI
 
-#!/bin/bash
-
 # Licensing library - source this in your scripts
 # Usage: source license.sh && validate_license
 
