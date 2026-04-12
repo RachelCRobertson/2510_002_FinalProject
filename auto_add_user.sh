@@ -35,8 +35,10 @@ add_user() {
      for item in "${user_list[@]}"
      do
           echo "$n"
-          #delete before turnin
+
+          #counter
           ((n++))
+
           #seperating first and last name
           read -r -a names <<< " $item"
           echo "Name: ${names[@]}"
@@ -48,7 +50,7 @@ add_user() {
           done
 
           #username
-          username=$(IFS=-; echo "${names[*]}")
+          username=$(IFS=.; echo "${names[*]}")
           echo "Username: $username"
 
           arr+=("$username")
@@ -59,7 +61,7 @@ add_user() {
           echo "Password: $password"
 
           #adding user
-          output=$(sudo adduser --disabled-password --gecos "" "$username" 2>&1)
+          output=$(sudo adduser --allow-bad-names --disabled-password --gecos "" "$username" 2>&1)
 
           while IFS= read -r line
           do
