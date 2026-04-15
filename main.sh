@@ -19,12 +19,13 @@ source ./auto_add_user.sh
 source ./manualAdd.sh
 source ./licensing.sh
 source ./delete_user.sh
-
+source ./show_all_users.sh
 menu(){
 	echo "Please select on of the following options"
 	echo -e "\t1. Auto Account Creation from Link"
 	echo -e "\t2. Add a User Manually"
-	echo -e "\t3. Exit" 
+	echo -e "\t3. List All Users"
+	echo -e "\t4. Exit"
 }
 
 RED="\033[0;31m"
@@ -73,12 +74,12 @@ echo -e  "\t\tUser Account Automation V1.0"
 validate_license
 
 # logic for main menu
-while [[ $choice -ne '3' ]]; do
+while [[ $choice -ne '4' ]]; do
 	menu
 
 	read -p "> " choice
 
-	while ! [[ $choice =~ ^[123]$ ]]; do
+	while ! [[ $choice =~ ^[1234]$ ]]; do
 		read -p "Invalid choice, please select 1, 2, or 3\n> " choice
 	done
 
@@ -92,6 +93,11 @@ while [[ $choice -ne '3' ]]; do
 	elif [[ $choice = '2' ]]; then
 	        # Adds a user manually
 		MAdd
+
+	elif [[ $choice = '3' ]]; then
+		# Shows all users on the system
+		show_users
+
 	fi
 done
 
