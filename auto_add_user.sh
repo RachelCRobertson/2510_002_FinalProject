@@ -1,5 +1,22 @@
 #!/bin/bash
 
+#-----------------------------------------
+# Filename:   auto_add_user.sh
+# Author:     RedDragon, Mallory Flesher
+# Purpose:    Provides the add_user()
+# 	      function that reads a
+# text file that holds usernames and
+# automatically generates passwords and
+# user accounts for each username.
+#
+# Functionality:
+#       1. Gen passwords
+#       2. Create accounts
+#-----------------------------------------
+
+GREEN="\033[0;32m"
+WHITE="\033[0m"
+
 add_user() {
 
      #beginning messages
@@ -10,16 +27,17 @@ add_user() {
      #reading from file
      IFS="#" read -r -a user_list < staff.txt
 
-     #array for deleting accounts
-     arr=()
+     #count
      n=0
 
      #creating user
      for item in "${user_list[@]}"
      do
           echo "$n"
-          #delete before turnin
+
+          #counter
           ((n++))
+
           #seperating first and last name
           read -r -a names <<< " $item"
           echo "Name: ${names[@]}"
@@ -31,10 +49,8 @@ add_user() {
           done
 
           #username
-          username=$(IFS=-; echo "${names[*]}")
+          username=$(IFS=.; echo "${names[*]}")
           echo "Username: $username"
-
-          arr+=("$username")
 
           #password
           phrase="DEELTECH"
@@ -42,7 +58,7 @@ add_user() {
           echo "Password: $password"
 
           #adding user
-          output=$(sudo adduser --disabled-password --gecos "" "$username" 2>&1)
+          output=$(sudo adduser --allow-bad-names --disabled-password --gecos "" "$username" 2>&1)
 
           while IFS= read -r line
           do
@@ -50,8 +66,7 @@ add_user() {
           done <<< "$output"
 
           echo "$username:$password" | sudo chpasswd
+          echo -e "\t${GREEN}$username added successfully.${WHITE}"
           echo "-------------------------------------------------"
      done
 }
-
-add_user
