@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 #!/bin/bash
 
 #-----------------------------------------
@@ -45,3 +46,5 @@ delete_user()
      fi
 }
 delete_user
+=======
+>>>>>>> Stashed changes
