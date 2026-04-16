@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #------------------------------------------------------
-# Filename:   auto_add_user.sh
+# Filename:   licensing.sh
 # Author:     RedDragon, Rachel Robertson, Brave AI Leo
 # Purpose:    Provides the validate_license()
 #             function that requires the end user
@@ -30,8 +30,8 @@ validate_license() {
     fi
 
     # Read and validate license
-    local stored_key=$(cat "$LICENSE_FILE" 2>/dev/null)
-    if [[ -z "$stored_key" ]] || [[ "$stored_key" != "$VALID_KEY_OBFUSCATED" ]]; then
+    local storedKey=$(cat "$LICENSE_FILE" 2>/dev/null)
+    if [[ -z "$storedKey" ]] || [[ "$storedKey" != "$VALID_KEY_OBFUSCATED" ]]; then
         echo "Invalid license. Please re-enter."
         prompt_for_license
     fi
@@ -51,17 +51,17 @@ validate_license() {
 }
 
 prompt_for_license() {
-    while [[ "$encoded_user_key" != "$VALID_KEY_OBFUSCATED" ]]; do
+    while [[ "$encodedUserKey" != "$VALID_KEY_OBFUSCATED" ]]; do
         echo "Please enter your 16-digit license key:"
-        read -s user_key
+        read -s userKey
         echo
 
         # Validate 16-digit format
-        if [[ "$user_key" =~ ^[0-9]{16}$ ]]; then
+        if [[ "$userKey" =~ ^[0-9]{16}$ ]]; then
             # Encode user input and compare
-            local encoded_user_key=$(echo -n "$user_key" | base64)
+            local encodedUserKey=$(echo -n "$userKey" | base64)
 
-            if [[ "$encoded_user_key" == "$VALID_KEY_OBFUSCATED" ]]; then
+            if [[ "$encodedUserKey" == "$VALID_KEY_OBFUSCATED" ]]; then
                 # Store the obfuscated key
                 echo "$VALID_KEY_OBFUSCATED" > "$LICENSE_FILE"
                 echo "License activated successfully!"

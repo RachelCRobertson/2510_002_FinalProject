@@ -14,9 +14,9 @@
 
 #main Script for application
 
-source ./ReadData.sh
+source ./read_data.sh
 source ./auto_add_user.sh
-source ./manualAdd.sh
+source ./manual_add.sh
 source ./licensing.sh
 source ./delete_user.sh
 source ./show_all_users.sh
@@ -92,7 +92,7 @@ while [[ $choice -ne '4' ]]; do
 
 	elif [[ $choice = '2' ]]; then
 	        # Adds a user manually
-		MAdd
+		m_add
 
 	elif [[ $choice = '3' ]]; then
 		# Shows all users on the system

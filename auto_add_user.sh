@@ -27,8 +27,7 @@ add_user() {
      #reading from file
      IFS="#" read -r -a user_list < staff.txt
 
-     #array for deleting accounts
-     arr=()
+     #count
      n=0
 
      #creating user
@@ -52,8 +51,6 @@ add_user() {
           #username
           username=$(IFS=.; echo "${names[*]}")
           echo "Username: $username"
-
-          arr+=("$username")
 
           #password
           phrase="DEELTECH"

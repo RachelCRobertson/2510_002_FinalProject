@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #-----------------------------------------
-# Filename:   auto_add_user.sh
+# Filename:   manual_add.sh
 # Author:     RedDragon, Rachel Robertson
-# Purpose:    Provides the MAdd()
+# Purpose:    Provides the m_add()
 #             function that takes a first
 # and last name from input and allows
 # an account to be created manually.
@@ -15,7 +15,7 @@
 #       2. Create an account manually
 #-----------------------------------------
 
-MAdd(){
+m_add(){
 	echo "-------------------------------------------------"
 	echo "                    Add User                     "
 	echo "-------------------------------------------------"

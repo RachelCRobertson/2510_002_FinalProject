@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #-----------------------------------------
-#Filename:    ReadData.sh
+#Filename:    read_data.sh
 # Author:     RedDragon, Zachary Seitner
 # Purpose:    Provides the scrape()
 #             function that reads data
@@ -22,4 +22,3 @@ scrape(){
 	sed 's/&nbsp;//g' |
 	sed 's/#$/\n/' > staff.txt
 }
-
