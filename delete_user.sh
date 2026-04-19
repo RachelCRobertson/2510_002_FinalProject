@@ -22,7 +22,7 @@ WHITE="\033[0m"
 delete_user()
 {
      #counter
-     num=0
+     num=1
 
      #fully deleting users
      while IFS= read -r user

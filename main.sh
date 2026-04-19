@@ -17,15 +17,16 @@
 source ./read_data.sh
 source ./auto_add_user.sh
 source ./manual_add.sh
+source ./manual_delete_user.sh
 source ./licensing.sh
-source ./delete_user.sh
 source ./show_all_users.sh
 menu(){
 	echo "Please select on of the following options"
 	echo -e "\t1. Auto Account Creation from Link"
 	echo -e "\t2. Add a User Manually"
 	echo -e "\t3. List All Users"
-	echo -e "\t4. Exit"
+	echo -e "\t4. Delete a User Manually"
+	echo -e "\t5. Exit"
 }
 
 RED="\033[0;31m"
@@ -74,13 +75,13 @@ echo -e  "\t\tUser Account Automation V1.0"
 validate_license
 
 # logic for main menu
-while [[ $choice -ne '4' ]]; do
+while [[ $choice -ne '5' ]]; do
 	menu
 
 	read -p "> " choice
 
-	while ! [[ $choice =~ ^[1234]$ ]]; do
-		read -p "Invalid choice, please select 1, 2, or 3\n> " choice
+	while ! [[ $choice =~ ^[12345]$ ]]; do
+		read -p "Invalid choice, please select 1, 2, 3, 4 or 5\n> " choice
 	done
 
 	if [[ $choice = '1' ]]; then
@@ -98,9 +99,10 @@ while [[ $choice -ne '4' ]]; do
 		# Shows all users on the system
 		show_users
 
+	elif [[ $choice = '4' ]]; then
+		#deletes a user manually
+		m_del
 	fi
 done
-
-# delete_user
 
 echo "The program has finished running."

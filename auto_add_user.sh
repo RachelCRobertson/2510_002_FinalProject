@@ -27,8 +27,8 @@ add_user() {
      #reading from file
      IFS="#" read -r -a user_list < staff.txt
 
-     #count
-     n=0
+     #counter
+     n=1
 
      #creating user
      for item in "${user_list[@]}"
@@ -39,7 +39,6 @@ add_user() {
           ((n++))
 
           #seperating first and last name
-
           read -r -a names <<< "$item"
 
           echo "Name: ${names[@]}"
@@ -54,12 +53,12 @@ add_user() {
           username=$(IFS=.; echo "${names[*]}")
           echo "Username: $username"
 
-<<<<<<< HEAD
-=======
-          #making username.txt
-          echo "$username" >> username.txt
+          #adding to username.txt
+          touch username.txt
+          if ! grep -Fxq "$username" username.txt; then
+               echo "$username" >> username.txt
+          fi
 
->>>>>>> add_user_accounts
           #password
           phrase="DEELTECH"
           password=$(IFS=; echo "${names[*]}$phrase")

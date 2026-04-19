@@ -15,7 +15,8 @@
 #       2. Create an account manually
 #-----------------------------------------
 
-m_add(){
+m_add()
+{
 	echo "-------------------------------------------------"
 	echo "                    Add User                     "
 	echo "-------------------------------------------------"
@@ -52,9 +53,17 @@ m_add(){
 	userName="$firstName"".""$lastName"
 	password="$firstName""$lastName""DEELTECH"
 
+	#adding username to username.txt
+	touch username.txt
+	if grep -Fxq "$userName" username.txt; then
+		printf "User %s already exists\n" "$userName"
+	else
+		echo "$userName" >> username.txt
+	fi
+
 	# Adds the user without a password and then changes the password
 	# immediately afterwards.
-	sudo adduser $userName --allow-bad-names  --disabled-password --gecos ""
+	sudo adduser --allow-bad-names  --disabled-password --gecos "" "$userName" 2>&1 | sed 's/^/\t/'
 	echo "$userName:$password" | sudo chpasswd
 
 	# Confirmation
