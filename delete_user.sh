@@ -8,7 +8,7 @@
 # Testing and demo purposes ONLY. It
 # references the auto_add_user.sh file
 # and deletes every user added by
-# the add_user() function. 
+# the add_user() function.
 #
 # Functionality:
 #       1. Delete auto added users
@@ -25,7 +25,7 @@ delete_user()
      num=0
 
      #fully deleting users
-     for user in "${arr[@]}"
+     while IFS= read -r user
      do
           echo "$num"
           ((num++))
@@ -37,5 +37,11 @@ delete_user()
           id "$user"
 	  echo -e "${GREEN}$user removed successfully.${WHITE}"
           echo "-------------------------------------------------"
-     done
+     done < username.txt
+
+     #deleting txt file
+     if [ -f "username.txt" ]; then
+          rm "username.txt"
+     fi
 }
+delete_user

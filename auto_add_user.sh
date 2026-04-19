@@ -39,7 +39,9 @@ add_user() {
           ((n++))
 
           #seperating first and last name
-          read -r -a names <<< " $item"
+
+          read -r -a names <<< "$item"
+
           echo "Name: ${names[@]}"
 
           #setting name lowercase
@@ -52,6 +54,12 @@ add_user() {
           username=$(IFS=.; echo "${names[*]}")
           echo "Username: $username"
 
+<<<<<<< HEAD
+=======
+          #making username.txt
+          echo "$username" >> username.txt
+
+>>>>>>> add_user_accounts
           #password
           phrase="DEELTECH"
           password=$(IFS=; echo "${names[*]}$phrase")
