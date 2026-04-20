@@ -72,7 +72,7 @@ echo -e  "\t\t   Property of DEELTECH"
 echo -e  "\t\tUser Account Automation V1.0"
 
 
-validate_license
+#validate_license
 
 # logic for main menu
 while [[ $choice -ne '5' ]]; do
