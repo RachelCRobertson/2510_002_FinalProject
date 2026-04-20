@@ -41,7 +41,7 @@ m_add()
 	read -p "Last name: " lastName
 
 	while ! [[ "$lastName" =~ ^[a-zA-Z]+$ ]]; do
-        	echo -e "${RED}First name is invalid.${WHITE}"
+        	echo -e "${RED}Last name is invalid.${WHITE}"
         	read -p "Please Enter the last name: " lastName
 	done
 
@@ -53,14 +53,6 @@ m_add()
 	userName="$firstName"".""$lastName"
 	password="$firstName""$lastName""DEELTECH"
 
-	#adding username to username.txt
-	[ -f username.txt ] || touch username.txt
-	if grep -Fxq "$userName" username.txt; then
-		printf "User %s already exists\n" "$userName"
-	else
-		echo "$userName" >> username.txt
-	fi
-
 	# Adds the user without a password and then changes the password
 	# immediately afterwards.
 	sudo adduser --allow-bad-names  --disabled-password --gecos "" "$userName" 2>&1 | sed 's/^/\t/'
@@ -69,3 +61,4 @@ m_add()
 	# Confirmation
 	echo -e "${GREEN}${userName} added successfully.${WHITE}"
 }
+# m_add
