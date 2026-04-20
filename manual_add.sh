@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #-----------------------------------------
-# Filename:   auto_add_user.sh
+# Filename:   manual_add.sh
 # Author:     RedDragon, Rachel Robertson
-# Purpose:    Provides the MAdd()
+# Purpose:    Provides the m_add()
 #             function that takes a first
 # and last name from input and allows
 # an account to be created manually.
@@ -15,7 +15,8 @@
 #       2. Create an account manually
 #-----------------------------------------
 
-MAdd(){
+m_add()
+{
 	echo "-------------------------------------------------"
 	echo "                    Add User                     "
 	echo "-------------------------------------------------"
@@ -52,9 +53,17 @@ MAdd(){
 	userName="$firstName"".""$lastName"
 	password="$firstName""$lastName""DEELTECH"
 
+	#adding username to username.txt
+	[ -f username.txt ] || touch username.txt
+	if grep -Fxq "$userName" username.txt; then
+		printf "User %s already exists\n" "$userName"
+	else
+		echo "$userName" >> username.txt
+	fi
+
 	# Adds the user without a password and then changes the password
 	# immediately afterwards.
-	sudo adduser $userName --allow-bad-names  --disabled-password --gecos ""
+	sudo adduser --allow-bad-names  --disabled-password --gecos "" "$userName" 2>&1 | sed 's/^/\t/'
 	echo "$userName:$password" | sudo chpasswd
 
 	# Confirmation

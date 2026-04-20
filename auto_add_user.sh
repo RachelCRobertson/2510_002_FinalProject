@@ -27,9 +27,8 @@ add_user() {
      #reading from file
      IFS="#" read -r -a user_list < staff.txt
 
-     #array for deleting accounts
-     arr=()
-     n=0
+     #counter
+     n=1
 
      #creating user
      for item in "${user_list[@]}"
@@ -40,7 +39,8 @@ add_user() {
           ((n++))
 
           #seperating first and last name
-          read -r -a names <<< " $item"
+          read -r -a names <<< "$item"
+
           echo "Name: ${names[@]}"
 
           #setting name lowercase
@@ -53,7 +53,11 @@ add_user() {
           username=$(IFS=.; echo "${names[*]}")
           echo "Username: $username"
 
-          arr+=("$username")
+          #adding to username.txt
+          touch username.txt
+          if ! grep -Fxq "$username" username.txt; then
+               echo "$username" >> username.txt
+          fi
 
           #password
           phrase="DEELTECH"
@@ -72,4 +76,9 @@ add_user() {
           echo -e "\t${GREEN}$username added successfully.${WHITE}"
           echo "-------------------------------------------------"
      done
+
+     #deleting staff.txt file
+     if [ -f "staff.txt" ]; then
+          rm "staff.txt"
+     fi
 }
