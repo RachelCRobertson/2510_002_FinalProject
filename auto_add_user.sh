@@ -53,12 +53,6 @@ add_user() {
           username=$(IFS=.; echo "${names[*]}")
           echo "Username: $username"
 
-          #adding to username.txt
-          touch username.txt
-          if ! grep -Fxq "$username" username.txt; then
-               echo "$username" >> username.txt
-          fi
-
           #password
           phrase="DEELTECH"
           password=$(IFS=; echo "${names[*]}$phrase")
