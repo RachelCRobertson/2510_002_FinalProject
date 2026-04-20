@@ -54,7 +54,7 @@ m_add()
 	password="$firstName""$lastName""DEELTECH"
 
 	#adding username to username.txt
-	touch username.txt
+	[ -f username.txt ] || touch username.txt
 	if grep -Fxq "$userName" username.txt; then
 		printf "User %s already exists\n" "$userName"
 	else
