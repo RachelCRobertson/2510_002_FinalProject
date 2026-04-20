@@ -76,4 +76,9 @@ add_user() {
           echo -e "\t${GREEN}$username added successfully.${WHITE}"
           echo "-------------------------------------------------"
      done
+
+     #deleting staff.txt file
+     if [ -f "staff.txt" ]; then
+          rm "staff.txt"
+     fi
 }
