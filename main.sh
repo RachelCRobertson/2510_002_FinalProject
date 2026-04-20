@@ -70,6 +70,7 @@ echo -e  "                       ##############"
 echo -e  "\t\t  Developed by RedDragon"
 echo -e  "\t\t   Property of DEELTECH"
 echo -e  "\t\tUser Account Automation V1.0"
+echo ""
 
 
 #validate_license
