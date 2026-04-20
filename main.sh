@@ -103,6 +103,10 @@ while [[ $choice -ne '5' ]]; do
 		#deletes a user manually
 		m_del
 	fi
+
 done
+
+# removes username.txt
+rm username.txt
 
 echo "The program has finished running."
