@@ -14,19 +14,48 @@
 #       1. Delete auto added users
 #-----------------------------------------
 
-source ./auto_add_user.sh
+source ./show_all_users.sh
 
 GREEN="\033[0;32m"
 WHITE="\033[0m"
 
 delete_user()
 {
+     #calling show_all_user funciton for username.txt file
+     show_users > /dev/null 2>&1
+
      #counter
      num=1
 
-     #fully deleting users
-     while IFS= read -r user
-     do
+     #reading from file and inserting into array
+     while IFS= read -r user; do
+          userArr+=("$user")
+     done < username.txt
+
+     #getting the first user
+     first="${userArr[0]}"
+
+     #checking with user that it is them
+     echo "To avoid further incidents make sure this is your username before contuning"
+     printf "Is this you?: %s " "$first"
+     read -p "[y/n]: " choice
+     choice=$(echo "$choice" | tr '[:upper:]' '[:lower:]')
+
+     #yes
+     if [[ "$choice" == "y" ]]; then
+          userArr=("${userArr[@]:1}")
+     else
+          show_users
+          echo ""
+          read -p "Pick yourself: " input
+          first="${userArr[$((input - 1))]}"
+          index=$((input - 1))
+          userArr=("${userArr[@]:0:$index}" "${userArr[@]:$((index + 1))}")
+     fi
+
+     printf "%s\n" "${userArr[@]}"
+
+      for user in "${userArr[@]}"; do
           echo "$num"
           ((num++))
 
@@ -35,13 +64,7 @@ delete_user()
 
           #checking if delete worked
           id "$user"
-	  echo -e "${GREEN}$user removed successfully.${WHITE}"
           echo "-------------------------------------------------"
-     done < username.txt
-
-     #deleting txt file
-     if [ -f "username.txt" ]; then
-          rm "username.txt"
-     fi
+      done
 }
 delete_user
