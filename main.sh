@@ -105,6 +105,8 @@ while [[ $choice -ne '5' ]]; do
 done
 
 # removes username.txt
-rm username.txt
+if test -f "username.txt"; then
+	rm username.txt
+fi
 
 echo "The program has finished running."

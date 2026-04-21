@@ -32,7 +32,7 @@ delete_user()
           userArr+=("$user")
      done < username.txt
 
-     #getting the first user
+     #getting the first user from array
      first="${userArr[0]}"
 
      #checking with user that it is them
@@ -44,18 +44,23 @@ delete_user()
      #yes
      if [[ "$choice" == "y" ]]; then
           userArr=("${userArr[@]:1}")
+     #no
      else
+          #printing users list
           show_users
           echo ""
+          #getting user input on which account they want to keep
           read -p "Pick yourself: " input
+          #getting it from the array
           first="${userArr[$((input - 1))]}"
           index=$((input - 1))
+          #removing it from the array and rebuilding it to avoid empty index
           userArr=("${userArr[@]:0:$index}" "${userArr[@]:$((index + 1))}")
      fi
 
-     printf "%s\n" "${userArr[@]}"
-
+      #reading through array to delete users
       for user in "${userArr[@]}"; do
+          #counter
           echo "$num"
           ((num++))
 
