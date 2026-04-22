@@ -16,9 +16,6 @@
 
 source ./show_all_users.sh
 
-GREEN="\033[0;32m"
-WHITE="\033[0m"
-
 delete_user()
 {
      #calling show_all_user funciton for username.txt file
