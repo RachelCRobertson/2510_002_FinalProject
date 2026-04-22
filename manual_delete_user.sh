@@ -16,9 +16,9 @@ source ./show_all_users.sh
 m_del()
 {
      show_users
-     echo "-------------------------------------------------"
-     echo "                  Delete User                    "
-     echo "-------------------------------------------------"
+     echo "============================================================="
+     echo "                        Delete User                          "
+     echo "============================================================="
      echo ""
 
      num=1;
@@ -30,6 +30,18 @@ m_del()
          	userArr+=("$user")
 	  	counter=$((counter + 1))
      	done < username.txt
+	
+	#testing
+	# counter=0;
+	
+	if [[ $counter -le 1 ]]; then
+		echo ""
+		echo "WARNING: There are not enough users on the device to delete users. "
+		echo "         There must be at least 2 users on the device to delete users."
+		echo "	 Exiting delete user..."
+		echo ""
+		return
+	fi
 
      	#getting user input
      	echo "0. Exit Delete User"
@@ -41,9 +53,22 @@ m_del()
      	# Checks that the value input is only numbers and is whithin the correct range
      	# If the user inputs 0 the function ends
      	while ! [[ "$num" =~ ^[0-9]+$ && "$num" -le $counter && "$num" -ge 0 ]]; do
+
+		if [[ $counter -le 1 ]]; then
+                	echo ""
+                	echo "WARNING: There are not enough users on the device to delete additional users. "
+                	echo "         Exiting delete user..."
+                	echo ""
+                	return
+        	fi
+
 		if [[ "$num" = 0 ]]; then
+			echo ""
+			echo "Exiting delete user..."
+			echo ""
 			return
 		fi
+
 		echo ""
 		echo "0. Exit Delete User"
 		echo "1-$counter. Delete User"
@@ -52,16 +77,49 @@ m_del()
 
      	done
 	echo ""
-	counter=0;
-	for user in "{userArr[@]}"; do
-		if [[ $counter = $num-1 ]]; then
-			echo "$num. $user deleted."
+#--------------------Prevents users who are logged in from being deleted-----------------------
+
+	#Get array of users that are currentlly logged on
+	loggedOnArr=( $( who | awk '{print $1}' ) )
+
+	# iterates through the logged on users
+	for user in "${loggedOnArr[@]}"; do
+
+		# Checks the chosen user against logged on users
+		if [[ "${userArr[$((num-1))]}" = $user ]]; then
+			echo ""
+			echo "WARNING: The user you attempted to delete is logged on."
+			echo "	     You cannot delete users that are logged on."
+			echo "	     Exiting delete user..."
+			echo ""
+			return
+		fi
+	done
+
+	# Locates the user based on their index and deletes it
+	for (( i=0; i<counter; i++ )); do
+		if [[ $i = $((num-1)) ]]; then
+			echo "Deleting ${userArr[$i]}..."
+			sudo deluser --remove-home "${userArr[$i]}"
+
+          		#checking if delete worked
+          		id "$user"
+
 			# remove from text file?
 		fi
-			counter=$((counter +1))
-			echo "counter = $counter, num = $num"
-			echo "userArr[0] = ${userArr[0]}"
 	done
+
+	if [[ $num -ne 0  ]]; then
+		counter=0;
+        	#reading from file and inserting into array
+        	while IFS= read -r user; do
+                	userArr+=("$user")
+                	counter=$((counter + 1))
+        	done < username.txt
+
+		# Calls show users after a sucessful deletion
+		show_users
+	fi
 done
 
      # while loop to check for the desired user
@@ -79,4 +137,4 @@ done
 #          fi
 #     done
 }
-m_del
+#m_del
