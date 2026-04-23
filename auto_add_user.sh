@@ -74,4 +74,3 @@ add_user() {
           rm "staff.txt"
      fi
 }
-add_user
