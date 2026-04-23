@@ -109,4 +109,6 @@ if test -f "username.txt"; then
 	rm username.txt
 fi
 
+echo ""
 echo "The program has finished running."
+echo ""
