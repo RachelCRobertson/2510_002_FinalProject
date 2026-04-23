@@ -108,6 +108,13 @@ m_del(){
 		done
 
 		if [[ $num -ne 0  ]]; then
+
+			# Calls show users after a sucessful deletion
+                        show_users
+
+			# clears array
+			unset userArr
+
 			counter=0;
         		#reading from file and inserting into array
         		while IFS= read -r user; do
@@ -115,8 +122,6 @@ m_del(){
                 		counter=$((counter + 1))
         		done < username.txt
 
-			# Calls show users after a sucessful deletion
-			show_users
 		fi
 	done
 }
