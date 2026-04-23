@@ -21,16 +21,12 @@ m_add()
 	echo "                    Add User                     "
 	echo "-------------------------------------------------"
 
-	RED='\033[0;31m'
-	GREEN='\033[0;32m'
-	WHITE='\033[0m'
-
 	# first name validation
 	echo ""
 	read -p "First name: " firstName
 
 	while ! [[ "$firstName" =~ ^[a-zA-Z]+$ ]]; do
-		echo -e "${RED}First name is invalid.${WHITE}"
+		echo -e "First name is invalid."
 		read -p "Please Enter the first name: " firstName
 	done
 
@@ -41,7 +37,7 @@ m_add()
 	read -p "Last name: " lastName
 
 	while ! [[ "$lastName" =~ ^[a-zA-Z]+$ ]]; do
-        	echo -e "${RED}Last name is invalid.${WHITE}"
+        	echo -e "Last name is invalid."
         	read -p "Please Enter the last name: " lastName
 	done
 
@@ -53,12 +49,15 @@ m_add()
 	userName="$firstName"".""$lastName"
 	password="$firstName""$lastName""DEELTECH"
 
+	echo ""
+	
+	echo "Adding $firstName.$lastName..."
+	
 	# Adds the user without a password and then changes the password
 	# immediately afterwards.
 	sudo adduser --allow-bad-names  --disabled-password --gecos "" "$userName" 2>&1 | sed 's/^/\t/'
 	echo "$userName:$password" | sudo chpasswd
 
-	# Confirmation
-	echo -e "${GREEN}${userName} added successfully.${WHITE}"
+	echo ""
 }
-# m_add
+ m_add
