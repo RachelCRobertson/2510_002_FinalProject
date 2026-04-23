@@ -14,9 +14,6 @@
 #       2. Create accounts
 #-----------------------------------------
 
-GREEN="\033[0;32m"
-WHITE="\033[0m"
-
 add_user() {
 
      #beginning messages
@@ -33,7 +30,7 @@ add_user() {
      #creating user
      for item in "${user_list[@]}"
      do
-          echo "$n"
+          echo "$((n+1))"
 
           #counter
           ((n++))
@@ -50,7 +47,7 @@ add_user() {
 
           #username
           username=$(IFS=.; echo "${names[*]}")
-          echo "Username: $username"
+	  echo "Username: $username"
 
           #making username.txt
           echo "$username" >> username.txt
@@ -69,7 +66,6 @@ add_user() {
           done <<< "$output"
 
           echo "$username:$password" | sudo chpasswd
-          echo -e "\t${GREEN}$username added successfully.${WHITE}"
           echo "-------------------------------------------------"
      done
 
@@ -78,3 +74,4 @@ add_user() {
           rm "staff.txt"
      fi
 }
+add_user
