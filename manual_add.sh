@@ -12,6 +12,8 @@
 #       1. Create an account manually
 #-----------------------------------------
 
+source ./gen_password.sh
+
 m_add()
 {
 	echo "-------------------------------------------------"
@@ -52,8 +54,9 @@ m_add()
 	# Adds the user without a password and then changes the password
 	# immediately afterwards.
 	sudo adduser --allow-bad-names  --disabled-password --gecos "" "$userName" 2>&1 | sed 's/^/\t/'
+
 	#calling password() to gen
-        password
+        password "$userName"
 
 	echo ""
 }

@@ -19,13 +19,19 @@ password() {
      show_users > /dev/null 2>&1
 
      #my weakness, counters
-     num=1
+     if [[ -f userpassList.txt ]]; then
+          num=$(wc -l < userpassList.txt 2>/dev/null)
+     else
+          num=0
+     fi
+     ((num++))
+
+     userArr=("$@")
+     nameArr=()
 
      #reading from file and inserting into array
-     while IFS= read -r user; do
-          #array of usernames
-          userArr+=("$user")
-
+      for user in "${userArr[@]}";
+      do
           #making array of names
           name="${user//./ }"
           read -r -a parts <<< "$name"
@@ -37,11 +43,7 @@ password() {
 
           nameArr+=("${formatted% }")
 
-     done < username.txt
-
-     #removing first user from both array (should be person running application)
-     userArr=("${userArr[@]:1}")
-     nameArr=("${nameArr[@]:1}")
+     done
 
      #reading through array to  gen passwords for users
      for index in "${!userArr[@]}"

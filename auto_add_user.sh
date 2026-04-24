@@ -10,11 +10,14 @@
 # user accounts for each username.
 #
 # Functionality:
-#       1. Gen passwords
-#       2. Create accounts
+#       1. Create accounts
 #-----------------------------------------
 
+source ./gen_password.sh
+source ./show_all_users.sh
+
 add_user() {
+     show_users > /dev/null 2>&1
 
      #beginning messages
      echo "-------------------------------------------------"
@@ -26,6 +29,7 @@ add_user() {
 
      #count
      n=0
+     users=()
 
      #creating user
      for item in "${user_list[@]}"
@@ -48,6 +52,9 @@ add_user() {
           #username
           username=$(IFS=.; echo "${names[*]}")
 
+          #adding to array
+          users+=("$username")
+
           #adding user
           output=$(sudo adduser --allow-bad-names --disabled-password --gecos "" "$username" 2>&1)
 
@@ -60,5 +67,5 @@ add_user() {
      done
 
      #call password() to gen
-     password
+     password "${users[@]}"
 }
