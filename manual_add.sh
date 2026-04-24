@@ -7,12 +7,9 @@
 #             function that takes a first
 # and last name from input and allows
 # an account to be created manually.
-# A password is then generated for the
-# account and then the account is created.
 #
 # Functionality:
-#       1. Generate password
-#       2. Create an account manually
+#       1. Create an account manually
 #-----------------------------------------
 
 m_add()
@@ -45,18 +42,18 @@ m_add()
 	lastName=${lastName,,}
 
 	# puts username and password in the following format:
-	# user-> first.last  pas-> firstlastDEELTECH
+	# user-> first.last
 	userName="$firstName"".""$lastName"
-	password="$firstName""$lastName""DEELTECH"
 
 	echo ""
-	
+
 	echo "Adding $firstName.$lastName..."
-	
+
 	# Adds the user without a password and then changes the password
 	# immediately afterwards.
 	sudo adduser --allow-bad-names  --disabled-password --gecos "" "$userName" 2>&1 | sed 's/^/\t/'
-	echo "$userName:$password" | sudo chpasswd
+	#calling password() to gen
+        password
 
 	echo ""
 }

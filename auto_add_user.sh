@@ -47,15 +47,6 @@ add_user() {
 
           #username
           username=$(IFS=.; echo "${names[*]}")
-	  echo "Username: $username"
-
-          #making username.txt
-          echo "$username" >> username.txt
-
-          #password
-          phrase="DEELTECH"
-          password=$(IFS=; echo "${names[*]}$phrase")
-          echo "Password: $password"
 
           #adding user
           output=$(sudo adduser --allow-bad-names --disabled-password --gecos "" "$username" 2>&1)
@@ -65,12 +56,9 @@ add_user() {
                echo -e "\t$line"
           done <<< "$output"
 
-          echo "$username:$password" | sudo chpasswd
           echo "-------------------------------------------------"
      done
 
-     #deleting staff.txt file
-     if [ -f "staff.txt" ]; then
-          rm "staff.txt"
-     fi
+     #call password() to gen
+     password
 }

@@ -68,5 +68,8 @@ delete_user()
           id "$user"
           echo "-------------------------------------------------"
       done
+
+      #deleting userpassList.txt
+      rm userpassList.txt
 }
 delete_user

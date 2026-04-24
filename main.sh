@@ -108,6 +108,10 @@ done
 if test -f "username.txt"; then
 	rm username.txt
 fi
+#removes staff.txt
+if test -f "staff.txt"; then
+	rm staff.txt
+fi
 
 echo ""
 echo "The program has finished running."
