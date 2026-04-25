@@ -88,10 +88,16 @@ while [[ $choice -ne '5' ]]; do
 
 		# Adds user accounts
 	        add_user
+		echo "Restarting script..."
+		source ./restart.sh
+		sleep 5
 
 	elif [[ $choice = '2' ]]; then
 	        # Adds a user manually
 		m_add
+		echo "Restarting script..."
+		source ./restart.sh
+		sleep 5
 
 	elif [[ $choice = '3' ]]; then
 		# Shows all users on the system
