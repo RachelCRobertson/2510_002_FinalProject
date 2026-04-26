@@ -98,10 +98,7 @@ m_del(){
 		for (( i=0; i<counter; i++ )); do
 			if [[ $i = $((num-1)) ]]; then
 				echo "Deleting ${userArr[$i]}..."
-				
-				# testing
-				echo "i = $i"
-				echo "num-1 = $((num-1))"
+
 				sudo deluser --remove-home "${userArr[$i]}"
 
           			#checking if delete worked
