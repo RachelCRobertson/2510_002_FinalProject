@@ -9,8 +9,8 @@
 # can function properly
 #
 # Functionality:
-#       1. Kills and restarts main
+#       1. Starts another main
 #-----------------------------------------
 
-kill main.sh
+echo "Restarting main..."
  ./main.sh
