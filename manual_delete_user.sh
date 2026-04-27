@@ -45,7 +45,7 @@ m_del(){
      		echo "0. Exit Delete User"
      		echo "1-$counter. Delete User"
      		echo ""
-     		read -p "Please enter the number that corrisponds to the user you want to delete: " num
+     		read -p "Please enter the number that corresponds to the user you want to delete: " num
 
 
      		# Checks that the value input is only numbers and is whithin the correct range

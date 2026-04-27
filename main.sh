@@ -21,7 +21,7 @@ source ./manual_delete_user.sh
 source ./licensing.sh
 source ./show_all_users.sh
 menu(){
-	echo "Please select on of the following options"
+	echo "Please select one of the following options"
 	echo -e "\t1. Auto Account Creation from Link"
 	echo -e "\t2. Add a User Manually"
 	echo -e "\t3. List All Users"
